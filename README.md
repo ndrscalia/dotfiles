@@ -14,7 +14,8 @@ git clone https://github.com/ndrscalia/dotfiles.git
 cd dotfiles
 ```
 Now you can use GNU stow to create symlinks with the following command:
-```stow .
+```
+stow .
 ```
 ## How create such a repo from scratch
 I used [this tutorial] (https://www.youtube.com/watch?v=y6XCebnB9gs). The workflow is the following:
