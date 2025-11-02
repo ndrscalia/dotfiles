@@ -18,7 +18,7 @@ Now you can use GNU stow to create symlinks with the following command:
 stow .
 ```
 ## How create such a repo from scratch
-I used [this tutorial] (https://www.youtube.com/watch?v=y6XCebnB9gs). The workflow is the following:
+I used [this tutorial](https://www.youtube.com/watch?v=y6XCebnB9gs). The workflow is the following:
 ```
 # dotfile/
 cp ~/.dotfile . # use cp -R if you're copying a directory
