@@ -20,6 +20,6 @@ export PATH="/usr/local/bin:$PATH"
 export TERM=xterm-256color
 export COLORTERM=truecolor
 
-eval "$(starship init zsh)"
+eval "$(oh-my-posh init zsh --config craver)"
 
 export PATH="$HOME/.local/bin:$PATH"
