@@ -20,6 +20,6 @@ export PATH="/usr/local/bin:$PATH"
 export TERM=xterm-256color
 export COLORTERM=truecolor
 
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/conf.json)"
+eval "$(oh-my-posh init zsh --config amro)"
 
 export PATH="$HOME/.local/bin:$PATH"
