@@ -6,6 +6,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export TERM=xterm-256color
 export COLORTERM=truecolor
 
-eval "$(oh-my-posh init zsh --config amro)"
+eval "$(oh-my-posh init zsh --config amro-enhanced.omp.json)"
 
 export PATH="$HOME/.local/bin:$PATH"
