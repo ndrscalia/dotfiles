@@ -1,6 +1,7 @@
 export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # enable 24-bit colors for starship
 export TERM=xterm-256color
