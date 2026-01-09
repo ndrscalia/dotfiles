@@ -20,4 +20,9 @@ return {
       require("telescope").load_extension("bibtex")
     end,
   },
+
+  {
+    "dhruvasagar/vim-table-mode",
+    ft = { "markdown" },
+  },
 }
