@@ -5,7 +5,9 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
 # enable 24-bit colors for starship
-export TERM=xterm-256color
+if [[ -z "$TMUX" ]]; then
+  export TERM=xterm-256color
+fi
 export COLORTERM=truecolor
 
 eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/amro-enhanced.omp.json)"
