@@ -13,4 +13,7 @@ export COLORTERM=truecolor
 eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/amro-enhanced.omp.json)"
 eval "$(zoxide init zsh)"
 
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^F' autosuggest-accept
+
 export PATH="$HOME/.local/bin:$PATH"
