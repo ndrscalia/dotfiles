@@ -4,6 +4,9 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
+export EDITOR=nvim
+export VISUAL=nvim
+
 # enable 24-bit colors
 if [[ -z "$TMUX" ]]; then
   export TERM=xterm-256color
@@ -16,4 +19,7 @@ eval "$(zoxide init zsh)"
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^H' autosuggest-accept
 
-export PATH="$HOME/.local/bin:$PATH"
+# With these lines you can edit long commands in nvim with `ctrl+x+e`
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
