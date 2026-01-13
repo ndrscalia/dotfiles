@@ -57,5 +57,27 @@ return {
     opts = {
       enabled = false,
     },
-  }
+  },
+  {
+    "3rd/image.nvim",
+    ft = { "markdown" },
+    dependencies = {
+      "luarocks.nvim",
+    },
+    opts = {
+      backend = "kitty",
+      integrations = {
+        markdown = {
+          enabled = true,
+          clear_in_insert_mode = true,
+          only_render_image_at_cursor = false,
+        },
+      },
+    },
+  },
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+  },
 }
