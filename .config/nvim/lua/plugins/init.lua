@@ -80,4 +80,9 @@ return {
     priority = 1000,
     config = true,
   },
+  {
+    "stevearc/aerial.nvim",
+    ft = { "markdown" },
+    opts = {},
+  },
 }
