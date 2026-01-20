@@ -27,6 +27,7 @@
           "properties": {
             "fetch_status": true,
             "fetch_upstream_icon": true,
+            "github_icon": "\uf408",
             "status_formats": {
               "Added": " ✚%d",
               "Modified": " ✹%d",
@@ -46,7 +47,8 @@
           "properties": {
             "display_mode": "context",
             "fetch_version": false,
-            "folder_name_fallback": false
+            "folder_name_fallback": false,
+            "default_venv_names": []
           }
         }
       ],
