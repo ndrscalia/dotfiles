@@ -14,10 +14,11 @@ fi
 export COLORTERM=truecolor
 
 eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/amro-enhanced.omp.json)"
+#eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/.omp.json)"
 eval "$(zoxide init zsh)"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-bindkey '^H' autosuggest-accept
+bindkey '^O' autosuggest-accept
 
 # With these lines you can edit long commands in nvim with `ctrl+x+e`
 autoload -z edit-command-line
