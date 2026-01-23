@@ -23,3 +23,7 @@ bindkey '^H' autosuggest-accept
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
+
+# aliases
+alias ls="ls -G"
+alias python313="/opt/homebrew/opt/python@3.13/libexec/bin/python3"
