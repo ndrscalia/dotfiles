@@ -14,7 +14,7 @@ fi
 export COLORTERM=truecolor
 
 eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/amro-enhanced.omp.json)"
-#eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/.omp.json)"
+#eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/gruvbox-enhanced.omp.json)"
 eval "$(zoxide init zsh)"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
