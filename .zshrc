@@ -7,6 +7,9 @@ export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export EDITOR=nvim
 export VISUAL=nvim
 
+# make `ls` colorize its output
+export CLICOLOR=1
+
 # enable 24-bit colors
 if [[ -z "$TMUX" ]]; then
   export TERM=xterm-256color
@@ -26,5 +29,4 @@ zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
 # aliases
-alias ls="ls -G"
 alias python313="/opt/homebrew/opt/python@3.13/libexec/bin/python3"
