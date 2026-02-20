@@ -30,4 +30,5 @@ bindkey "^X^E" edit-command-line
 
 # aliases
 alias python313="/opt/homebrew/opt/python@3.13/libexec/bin/python3"
-alias grep="grep --color=auto"
+alias grep="grep --color=always"
+alias ll="ll -la"
