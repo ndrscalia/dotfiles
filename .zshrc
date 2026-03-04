@@ -29,6 +29,13 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
+# Custom functions
+fzfgrep() {
+    grep -n '' "$1" | fzf --delimiter=: \
+      --preview "awk -v n={1} -v q={q} 'NR>=n-5 && NR<=n+5 {if(NR==n) {gsub(q, \"\033[7m&\033[0m\"); print} else print}' $1" \
+      --preview-window=up:12
+}
+
 # aliases
 alias python313="/opt/homebrew/opt/python@3.13/libexec/bin/python3"
 alias grep="grep --color=always"
