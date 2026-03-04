@@ -73,7 +73,29 @@ return {
           only_render_image_at_cursor = false,
         },
       },
+      max_width = 100,
+      max_height = 40,
+      max_height_window_percentage = math.huge,
+      max_width_window_percentage = math.huge,
+      window_overlap_clear_enabled = true,
+      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
     },
+  },
+  {
+    "benlubas/molten-nvim",
+    version = "^1.0.0",
+    lazy = false,
+    dependencies = { "3rd/image.nvim" },
+    build = ":UpdateRemotePlugins",
+    init = function()
+      vim.g.molten_image_provider = "image.nvim"
+      vim.g.molten_auto_open_output = false
+      vim.g.molten_wrap_output = true
+      vim.g.molten_virt_text_output = true
+      vim.g.molten_virt_lines_off_by_1 = true
+      vim.g.molten_output_win_max_height = 80
+      vim.g.molten_virt_text_max_lines = 80
+    end,
   },
   {
     "vhyrro/luarocks.nvim",
@@ -84,5 +106,15 @@ return {
     "stevearc/aerial.nvim",
     ft = { "markdown" },
     opts = {},
+  },
+  {
+    "GCBallesteros/jupytext.nvim",
+    lazy = false,
+    config = true,
+  },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = true,
   },
 }
