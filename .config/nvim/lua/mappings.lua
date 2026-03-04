@@ -5,6 +5,15 @@ vim.keymap.set("n", "<leader>fc", ":Telescope bibtex<CR>", { desc = "Find citati
 
 vim.keymap.set("n", "<leader>z", ":ZenMode<CR>", { desc = "Toggle Zen Mode" })
 
+vim.keymap.set("n", "<leader>ti", function()
+  local img = require("image")
+  if img.is_enabled() then
+    img.disable()
+  else
+    img.enable()
+  end
+end, { desc = "Toggle image.nvim" })
+
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
