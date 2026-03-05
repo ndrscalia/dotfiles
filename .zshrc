@@ -36,6 +36,22 @@ fzfgrep() {
       --preview-window=up:12
 }
 
+fzfrg() {
+    if [ -z "$1" ]; then
+        rg --color=always --line-number --no-heading --smart-case "" | fzf --ansi \
+          --color "hl:-1:underline,hl+:-1:underline:reverse" \
+          --delimiter : \
+          --preview "bat --color=always {1} --highlight-line {2}" \
+          --preview-window 'up,12,border-bottom,+{2}+3/3,~3'
+    else
+        rg --color=always --line-number --no-heading --smart-case "" "$1" | fzf --ansi \
+          --color "hl:-1:underline,hl+:-1:underline:reverse" \
+          --delimiter : \
+          --preview "bat --color=always $1 --highlight-line {1}" \
+          --preview-window 'up,12,border-bottom,+{1}+3/3,~3'
+    fi
+}
+
 # aliases
 alias python313="/opt/homebrew/opt/python@3.13/libexec/bin/python3"
 alias grep="grep --color=always"
