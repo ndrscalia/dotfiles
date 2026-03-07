@@ -1,5 +1,5 @@
 # My dotfiles
-This repository contains my dotfiles. A thorough description of the main features can be found in [[DESC.md]] and in other docs that are there referenced.
+This repository contains my dotfiles. A thorough description of the main features can be found in [DESC.md](https://raw.githubusercontent.com/ndrscalia/dotfiles/refs/heads/main/DESC.md?token=GHSAT0AAAAAADPQ5CXXOJ6LXZ5CJER5N5PY2NMFKQA) and in other docs that are there referenced.
 
 
 The objective of these dotfiles is to make your terminal an actual productive space that you can live in, while at same time avoiding clutter and too much maintenance overhead. You will have to do minor fixes from time to time when you do update something, but with version control and a LLM used as CLI tool such fixes often require seconds only.
