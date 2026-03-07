@@ -39,7 +39,7 @@ A secondary prompt line shows `#` as the input cursor.
 ### Shell Integrations
 
 - **zoxide:** `cd` replacement with frecency-based directory jumping (`z` command).
-- **zsh-autosuggestions:** Fish-like inline suggestions, accepted with `Ctrl+O`.
+- **zsh-autosuggestions:** Fish-like inline suggestions, accepted with `Ctrl+o`.
 - **edit-command-line:** Edit the current command line in Neovim with `Ctrl+X Ctrl+E`.
 
 ### Custom Functions
@@ -255,6 +255,6 @@ Spell dictionaries for English and Italian are present (`spell/en.utf-8.add` and
 
 ### Further Info
 
-Have a look at ... for further informations on keybindings and plugins specifically meant to work with `.md` or `.qmd` file and for scholarly writing in nvim in general.
+Have a look at [DESC.md](https://raw.githubusercontent.com/ndrscalia/dotfiles/refs/heads/main/markdown_examples.md?token=GHSAT0AAAAAADPQ5CXXFHLBANMIEOX5BO4S2NMFI4Q) for further informations on keybindings and plugins specifically meant to work with `.md` or `.qmd` file and for scholarly writing in nvim in general.
 
 [^1]: Python 3.13 is in the aliases, to allow for quickly invoking it if downgrading from 3.14 is needed.
