@@ -34,8 +34,6 @@ oh-my-posh with the `amro-enhanced` theme (a custom one). The prompt displays:
 - Git branch, status (added/modified/deleted/untracked counts), upstream tracking, and stash count
 - Active Python's virtualenv name (when applicable)
 
-A secondary prompt line shows `#` as the input cursor.
-
 ### Shell Integrations
 
 - **zoxide:** `cd` replacement with frecency-based directory jumping (`z` command).
@@ -52,7 +50,7 @@ A secondary prompt line shows `#` as the input cursor.
 |-------------|-----------------------------------------------------|
 | `python313` | `/opt/homebrew/opt/python@3.13/libexec/bin/python3` |
 | `grep`      | `grep --color=always`                               |
-| `ll`        | `ll -la`                                            |
+| `ll`        | `ls -la`                                            |
 
 ---
 
