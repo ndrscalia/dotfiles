@@ -2702,6 +2702,6 @@ include colors.conf
 
 
 # BEGIN_KITTY_THEME
-# Nord
+# Gruvbox Dark
 include current-theme.conf
 # END_KITTY_THEME
