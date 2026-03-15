@@ -119,6 +119,7 @@ return {
   },
   {
     "jpalardy/vim-slime",
+    lazy = false,
     config = function()
         vim.g.slime_target = "tmux"
         vim.g.slime_default_config = {
@@ -126,13 +127,11 @@ return {
             target_pane = "{last}",
         }
         vim.g.slime_dont_ask_default = 1
-        vim.g.slime_cell_delimiter = "# %%"
         vim.g.slime_no_mappings = 1
 
         vim.keymap.set("n", "<leader>ss", "<Plug>SlimeParagraphSend", { desc = "Send paragraph" })
         vim.keymap.set("x", "<leader>ss", "<Plug>SlimeRegionSend", { desc = "Send selection" })
         vim.keymap.set("n", "<leader>sl", "<Plug>SlimeLineSend", { desc = "Send line" })
-        vim.keymap.set("n", "<leader>sc", ":SlimeSendCell<CR>", { desc = "Send cell" })
     end,
   },
 }
