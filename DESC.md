@@ -116,6 +116,11 @@ Two prompt themes are included: amro-enhanced and gruvbox-enhanced. Both are cus
 
 ---
 
+## ipython
+**Files:** `.ipython/profile_default/startup/00-rich-df.py`
+
+As of now, only a small startup script is there that runs automatically every time that ipython is launched. It monkey-patches `pd.DataFrame.__repr__` so that any DataFrame that gets evaluated in the REPL renders as a colored and striped table using `rich` and `tabulate`. These package should be installed in the virtual environment via pip. If any package is missing, the script silently falls back to default behavior.
+
 ## Neovim (NvChad v2.5)
 
 **Directory:** `.config/nvim/`
@@ -162,6 +167,7 @@ All plugins beyond the NvChad defaults:
 |---------------------------|------------------------------------------------------|---------------------|
 | `conform.nvim`            | Code formatting                                      | Always              |
 | `nvim-lspconfig`          | LSP client configuration                             | Always              |
+| `vim-slime`               | Send code to other tmux panes                        | Always              |
 | `telescope-bibtex.nvim`   | BibTeX citation search via Telescope                 | Markdown, TeX files |
 | `vim-table-mode`          | Automatic table formatting and alignment              | Markdown files     |
 | `zen-mode.nvim`           | Distraction-free writing (80-column, word wrap)       | On `:ZenMode` cmd  |
@@ -212,6 +218,10 @@ All custom autocommands relate to Jupyter notebook (`.ipynb`) handling:
 | n    | `<leader>fc`   | Telescope BibTeX citation search |
 | n    | `<leader>z`    | Toggle Zen Mode           |
 | n    | `<leader>ti`   | Toggle image.nvim on/off  |
+| n    | `<leader>ss`   | Send paragraph to REPL    |
+| x    | `<leader>ss`   | Send selection to REPL    |
+| n    | `<leader>sl`   | Send line to REPL         |
+
 
 #### Molten (Jupyter)
 
@@ -242,6 +252,9 @@ The `run_cell` function (`<localleader>rc`) finds the nearest `# %%` markers abo
 ### Telescope BibTeX
 
 Configured to search a global bibliography file (`path/to/bibliography.bib`). Citations are inserted in Pandoc format: `[@key]`.
+
+### vim-slime
+For the vim-slime keybindings to work properly, the pane to which you want to send the code has to be the last selected one. If you rearrange panes or want to send to a different one, run `:SlimeConfig` inside nvim. It will prompt you for the socket name and target pane (`{last}`, `{right}`, `{left}`). With this command you can also specify a specific pane numbers.
 
 ### Disabled Built-in Plugins
 
