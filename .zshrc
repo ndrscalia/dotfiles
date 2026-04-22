@@ -88,6 +88,13 @@ theme() {
     sed -i '' "s/theme = \".*\"/theme = \"${nvim_theme}\"/" "$chadrc"
     nvim --headless -c "lua require('base46').compile()" -c "qa" 2>/dev/null
 
+    # bat: use a light theme when in light mode, unset for dark (uses bat default)
+    if [[ "$1" == "light" ]]; then
+        export BAT_THEME="gruvbox-light"
+    else
+        unset BAT_THEME
+    fi
+
     # oh-my-posh: re-init prompt with the matching theme
     eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/${omp_theme}.omp.json)"
 
