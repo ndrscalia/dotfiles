@@ -52,6 +52,48 @@ fzfrg() {
     fi
 }
 
+# switch theme across kitty, tmux, and nvchad
+theme() {
+    local kitty_dir=~/dotfiles/.config/kitty
+    local tmux_dir=~/dotfiles/.config/tmux
+    local chadrc=~/dotfiles/.config/nvim/lua/chadrc.lua
+
+    case "$1" in
+        dark)
+            local kitty_theme="tokyonight"
+            local nvim_theme="tokyonight"
+            local omp_theme="amro-enhanced"
+            ;;
+        light)
+            local kitty_theme="rosepine-dawn"
+            local nvim_theme="rosepine-dawn"
+            local omp_theme="gruvbox-enhanced"
+            ;;
+        *)
+            echo "Usage: theme [dark|light]"
+            return 1
+            ;;
+    esac
+
+    # kitty: update theme file and live-reload colors
+    cp "$kitty_dir/${kitty_theme}-theme.conf" "$kitty_dir/current-theme.conf"
+    kitten @ set-colors --all --configured "$kitty_dir/current-theme.conf" 2>/dev/null \
+        || echo "Kitty: restart or press ctrl+shift+f5 to reload"
+
+    # tmux: update theme file and reload config
+    cp "$tmux_dir/${kitty_theme}-theme.conf" "$tmux_dir/current-theme.conf"
+    tmux source-file "$tmux_dir/tmux.conf" 2>/dev/null
+
+    # nvchad: update chadrc and recompile base46 cache
+    sed -i '' "s/theme = \".*\"/theme = \"${nvim_theme}\"/" "$chadrc"
+    nvim --headless -c "lua require('base46').compile()" -c "qa" 2>/dev/null
+
+    # oh-my-posh: re-init prompt with the matching theme
+    eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/${omp_theme}.omp.json)"
+
+    echo "Switched to $1 theme."
+}
+
 # aliases
 alias python313="/opt/homebrew/opt/python@3.13/libexec/bin/python3"
 alias grep="grep --color=always"

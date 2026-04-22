@@ -44,6 +44,8 @@ oh-my-posh with the `amro-enhanced` theme (a custom one). The prompt displays:
 
 - `fzfrg [dir | file]` -- Fuzzy search through file contents using `ripgrep` and `fzf`, with `bat`-highlighted preview. When called without arguments, searches the current directory recursively. When called with an  argument, scopes the search to that directory/file.
 
+- `theme [dark | light]` -- Switch Kitty, Tmux and NvChad's theme from dark (tokyonighit) to light (rosepine-dawn). NvChad updates the theme directly in `chadrc.lua`. Tmux swaps `current-theme.conf` and reloads the config. `tmux.conf` source a theme file instead of inline colors for the status bar. Kitty swaps `current-theme.conf` and live-reloads colors via `kitten @ set-colors` (`allow_remote_control yes` is needed in `kitty.conf` to achieve this). In the command you will see a `nvim --headless` line: that is needed because NvChad compiles themes into a case at `~/.local/share/nvim/base46` and every new instance load from that cache, not from `chadrc.lua` directly. The headless nvim call allows to recompile the cache after updating the theme.
+
 ### Aliases
 
 | Alias       | Expands to                                          |
