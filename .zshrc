@@ -1,9 +1,9 @@
-export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="$HOME/.virtualenvs/neovim/bin:$PATH"
+export PATH="/opt/homebrew/opt/python@3.14/libexec/bin:$PATH"
 
 export EDITOR=nvim
 export VISUAL=nvim
