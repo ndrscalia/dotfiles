@@ -17,8 +17,9 @@ if [[ -z "$TMUX" ]]; then
 fi
 export COLORTERM=truecolor
 
-eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/amro-enhanced.omp.json)"
-#eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/gruvbox-enhanced.omp.json)"
+# load persisted theme choices (set by `theme` command)
+eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/${$(cat ~/.omp-theme 2>/dev/null):-amro-enhanced}.omp.json)"
+[[ -f ~/.bat-theme ]] && export BAT_THEME=$(<~/.bat-theme)
 eval "$(zoxide init zsh)"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -88,14 +89,17 @@ theme() {
     sed -i '' "s/theme = \".*\"/theme = \"${nvim_theme}\"/" "$chadrc"
     nvim --headless -c "lua require('base46').compile()" -c "qa" 2>/dev/null
 
-    # bat: use a light theme when in light mode, unset for dark (uses bat default)
+    # bat: persist and apply theme
     if [[ "$1" == "light" ]]; then
         export BAT_THEME="gruvbox-light"
+        echo "gruvbox-light" > ~/.bat-theme
     else
         unset BAT_THEME
+        rm -f ~/.bat-theme
     fi
 
-    # oh-my-posh: re-init prompt with the matching theme
+    # oh-my-posh: persist choice and re-init prompt
+    echo "${omp_theme}" > ~/.omp-theme
     eval "$(oh-my-posh init zsh --config ~/dotfiles/.config/ohmyposh/${omp_theme}.omp.json)"
 
     echo "Switched to $1 theme."
