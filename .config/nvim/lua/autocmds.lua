@@ -51,3 +51,22 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     end)
   end,
 })
+
+-- Godot: buffer-local breakpoint commands + keymaps on .gd files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gdscript",
+  callback = function(args)
+    vim.api.nvim_buf_create_user_command(args.buf, "GodotBreakpoint", function()
+      vim.cmd("normal! obreakpoint")
+      vim.cmd("write")
+    end, {})
+    vim.api.nvim_buf_create_user_command(args.buf, "GodotDeleteBreakpoints", function()
+      vim.cmd("g/breakpoint/d")
+      vim.cmd("write")
+    end, {})
+    vim.keymap.set("n", "<leader>gb", "<cmd>GodotBreakpoint<cr>",
+      { buffer = args.buf, desc = "Godot: insert breakpoint" })
+    vim.keymap.set("n", "<leader>gD", "<cmd>GodotDeleteBreakpoints<cr>",
+      { buffer = args.buf, desc = "Godot: clear all breakpoints" })
+  end,
+})

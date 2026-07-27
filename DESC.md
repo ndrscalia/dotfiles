@@ -150,6 +150,7 @@ Configured via `nvim-lspconfig` and Mason:
 | `marksman`       | Markdown              |
 | `markdown_oxide` | Markdown (wiki links) |
 | `pyright`        | Python                |
+| `gdscript`       | GDScript (Godot)      |
 
 ### Formatting
 
@@ -195,12 +196,18 @@ For more informations on these package, please refer to the docs.
 
 Since molten.nvim is a really complex plugin, please have a look at the docs if something is not working. Have a look at the section below about keybindings.
 
-### Autocommands (molten.nvim related)
+### Autocommands
 
-All custom autocommands relate to Jupyter notebook (`.ipynb`) handling:
+Two areas have custom autocommands: Jupyter notebooks and Godot projects.
 
-- **BufAdd / BufEnter** (`.ipynb`): Automatically initializes a Molten kernel (detected from notebook metadata or active virtualenv) and imports existing cell outputs.
-- **BufWritePost** (`.ipynb`): Exports Molten outputs back into the notebook file on save.
+**Jupyter notebooks** (`.ipynb`):
+
+- **BufAdd / BufEnter**: Automatically initializes a Molten kernel (detected from notebook metadata or active virtualenv) and imports existing cell outputs.
+- **BufWritePost**: Exports Molten outputs back into the notebook file on save.
+
+**Godot** (`gdscript` filetype):
+
+- **FileType**: Registers buffer-local `GodotBreakpoint` and `GodotDeleteBreakpoints` user commands (with matching `<leader>gb` and `<leader>gD` keymaps) that insert or strip `breakpoint` lines in the current script.
 
 ### Filetype Overrides
 
@@ -250,6 +257,15 @@ The `run_cell` function (`<localleader>rc`) finds the nearest `# %%` markers abo
 | n    | `<leader>mr`   | Toggle render-markdown.nvim         |
 | n    | `<leader>ms`   | Browse document sections via Telescope LSP symbols |
 
+#### Godot (buffer-local)
+
+Active only in `.gd` (gdscript) buffers.
+
+| Mode | Key            | Action                                    |
+|------|----------------|-------------------------------------------|
+| n    | `<leader>gb`   | Insert `breakpoint` on a new line and save |
+| n    | `<leader>gD`   | Remove all `breakpoint` lines and save     |
+
 
 ### Telescope BibTeX
 
@@ -257,6 +273,28 @@ Configured to search a global bibliography file (`path/to/bibliography.bib`). Ci
 
 ### vim-slime
 For the vim-slime keybindings to work properly, the pane to which you want to send the code has to be the last selected one. If you rearrange panes or want to send to a different one, run `:SlimeConfig` inside nvim. It will prompt you for the socket name and target pane (`{last}`, `{right}`, `{left}`). With this command you can also specify a specific pane numbers.
+
+### Godot
+
+Neovim can act as Godot's external script editor and consume GDScript diagnostics, completion, and goto-definition from a running Godot instance.
+
+On startup, `init.lua` walks up one directory to look for a `project.godot` file. If found, it sets `vim.g.is_godot_project = true` and calls `serverstart` on `<project>/server.pipe`, so Godot can push open-file commands to this Neovim instance via `--remote-send`. Because of this, Neovim must be launched from the project root (or a direct subdirectory) for the round-trip to work.
+
+The GDScript LSP is defined in `.config/nvim/lsp/gdscript.lua` and connects to Godot's built-in language server on `127.0.0.1:6005` (override with the `GDScript_Port` environment variable). It only attaches to buffers with `gdscript`, `gd`, or `gdscript3` filetype whose root markers include `project.godot` or `.git`. Treesitter parsers `gdscript`, `godot_resource`, and `gdshader` are added to the `ensure_installed` list for syntax highlighting.
+
+Debugging is done via the `breakpoint` keyword rather than `nvim-dap` (which is unreliable with Godot). The FileType autocommand above provides `<leader>gb` to insert one and `<leader>gD` to strip them all.
+
+On the Godot side (one-time setup, not part of the dotfiles), open Editor Settings and configure:
+
+- **Text Editor / External**: set `Use External Editor` to on, `Exec Path` to the full path of the `nvim` binary, and `Exec Flags` to `--server {project}/server.pipe --remote-send "<C-\><C-N>:e {file}<CR>:call cursor({line}+1,{col})<CR>"`.
+- **Network / Language Server**: enable `Use Thread` to reduce LSP restarts.
+- In the Script view (top-bar workspace), enable `Debug with External Editor` so `breakpoint` hits pause the running scene and focus the paused line in Neovim.
+
+Each Godot project should also gitignore `server.pipe`, `*.uid`, and `.godot/`.
+
+If the LSP gets messed up, just run `:LspRestart`.
+
+This config was based on [Simon Dalvai's](https://simondalvai.org/blog/godot-neovim/) setup.
 
 ### Disabled Built-in Plugins
 
