@@ -109,3 +109,4 @@ theme() {
 alias python313="/opt/homebrew/opt/python@3.13/libexec/bin/python3"
 alias grep="grep --color=always"
 alias ll="ls -la"
+alias jql="jq -C . | less -R"
