@@ -15,6 +15,7 @@ for _, rel in ipairs({ "", "/.." }) do
   end
 end
 vim.g.is_godot_project = godot_root ~= nil
+vim.g.godot_root = godot_root
 if godot_root and not vim.uv.fs_stat(godot_root .. "server.pipe") then
   vim.fn.serverstart(godot_root .. "server.pipe")
 end

@@ -68,5 +68,31 @@ vim.api.nvim_create_autocmd("FileType", {
       { buffer = args.buf, desc = "Godot: insert breakpoint" })
     vim.keymap.set("n", "<leader>gD", "<cmd>GodotDeleteBreakpoints<cr>",
       { buffer = args.buf, desc = "Godot: clear all breakpoints" })
+    vim.keymap.set("n", "<leader>gr", function()
+      local root = vim.g.godot_root
+      if not root then
+        vim.notify("Not in a Godot project", vim.log.levels.WARN)
+        return
+      end
+      local main_scene = nil
+      local f = io.open(root .. "project.godot", "r")
+      if f then
+        for line in f:lines() do
+          local scene = line:match('^run/main_scene="(.-)"')
+          if scene then
+            main_scene = scene
+            break
+          end
+        end
+        f:close()
+      end
+      local cmd = { vim.g.godot_bin or "godot", "--path", root,
+                    "--remote-debug", "tcp://127.0.0.1:6007" }
+      if main_scene then
+        table.insert(cmd, main_scene)
+      end
+      vim.system(cmd, { detach = true })
+      vim.notify("Godot: launched " .. (main_scene or "main scene"))
+    end, { buffer = args.buf, desc = "Godot: run main scene" })
   end,
 })

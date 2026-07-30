@@ -207,7 +207,7 @@ Two areas have custom autocommands: Jupyter notebooks and Godot projects.
 
 **Godot** (`gdscript` filetype):
 
-- **FileType**: Registers buffer-local `GodotBreakpoint` and `GodotDeleteBreakpoints` user commands (with matching `<leader>gb` and `<leader>gD` keymaps) that insert or strip `breakpoint` lines in the current script.
+- **FileType**: Registers buffer-local `GodotBreakpoint` and `GodotDeleteBreakpoints` user commands (with matching `<leader>gb` and `<leader>gD` keymaps) that insert or strip `breakpoint` lines in the current script, plus a `<leader>gr` keymap that launches the project's main scene.
 
 ### Filetype Overrides
 
@@ -265,6 +265,7 @@ Active only in `.gd` (gdscript) buffers.
 |------|----------------|-------------------------------------------|
 | n    | `<leader>gb`   | Insert `breakpoint` on a new line and save |
 | n    | `<leader>gD`   | Remove all `breakpoint` lines and save     |
+| n    | `<leader>gr`   | Run the project's main scene via Godot CLI |
 
 
 ### Telescope BibTeX
@@ -283,6 +284,8 @@ On startup, `init.lua` walks up one directory to look for a `project.godot` file
 The GDScript LSP is defined in `.config/nvim/lsp/gdscript.lua` and connects to Godot's built-in language server on `127.0.0.1:6005` (override with the `GDScript_Port` environment variable). It only attaches to buffers with `gdscript`, `gd`, or `gdscript3` filetype whose root markers include `project.godot` or `.git`. Treesitter parsers `gdscript`, `godot_resource`, and `gdshader` are added to the `ensure_installed` list for syntax highlighting.
 
 Debugging is done via the `breakpoint` keyword rather than `nvim-dap` (which is unreliable with Godot). The FileType autocommand above provides `<leader>gb` to insert one and `<leader>gD` to strip them all.
+
+Running the project is bound to `<leader>gr`. The mapping reads `run/main_scene` from `project.godot` and spawns `godot --path <root> <main_scene> --remote-debug tcp://127.0.0.1:6007` detached, so the process survives Neovim quitting. The `--remote-debug` flag connects the game back to the editor's debug channel (default port 6007, configurable under Editor Settings / Network / Debug / Remote Port). For the mapping to work, the `godot` binary must be resolvable on `$PATH`, either through a symlink such as `~/.local/bin/godot -> /Applications/Godot.app/Contents/MacOS/Godot`, or by setting `vim.g.godot_bin` to an absolute path in `init.lua`. Known limitation: because the game is launched outside the editor process, Cmd+. in the editor UI will not stop it; close the game window directly instead.
 
 On the Godot side (one-time setup, not part of the dotfiles), open Editor Settings and configure:
 
